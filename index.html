@@ -6,6 +6,7 @@
   <title>Camilore</title>
   <meta name="description" content="Camilore crée des outils simples et puissants pour mieux comprendre, décider et performer." />
   <meta name="theme-color" content="#0b0f19" />
+  <link rel="canonical" href="https://camilore.com/">
   <style>
     :root {
       --bg: #0b0f19;
@@ -460,9 +461,11 @@
 
       <div class="header-right">
         <nav class="nav-links" aria-label="Navigation principale">
-          <a href="#produits" data-i18n="navProducts">Produits</a>
-          <a href="#apropos" data-i18n="navAbout">À propos</a>
-          <a href="#contact" data-i18n="navContact">Contact</a>
+          <a href="#produits">Produits</a>
+          <a href="#apropos">À propos</a>
+          <a href="apexdelta.html">ApexDelta</a>
+          <a href="privacy.html">Confidentialité</a>
+          <a href="#contact">Contact</a>
         </nav>
 
         <div class="lang-switcher" aria-label="Sélecteur de langue">
@@ -533,12 +536,14 @@
 
         <div class="cards">
           <article class="card">
-            <div class="icon" aria-hidden="true">🏁</div>
-            <h3>ApexDelta</h3>
-            <p data-i18n="apexDeltaBody">
-              Une application de dashboard de sim racing axée sur la télémétrie, le delta en direct et la performance
-              sur piste, pensée pour offrir une lecture rapide et utile pendant la course.
-            </p>
+            <a href="apexdelta.html" style="display:block; height:100%;">
+              <div class="icon">🏁</div>
+              <h3>ApexDelta</h3>
+              <p>
+                Une application de dashboard de sim racing axée sur la télémétrie, le delta en direct et la performance
+                sur piste, pensée pour offrir une lecture rapide et utile pendant la course.
+              </p>
+            </a>
           </article>
 
           <article class="card">
@@ -586,10 +591,12 @@
   <footer class="footer" id="contact">
     <div class="wrap footer-inner">
       <div data-i18n="footerCopy">© 2026 Camilore. Tous droits réservés.</div>
-      <div class="footer-links">
-        <a href="mailto:contact@camilore.com">contact@camilore.com</a>
-        <a href="#top" data-i18n="backToTop">Retour en haut</a>
-      </div>
+        <div class="footer-links">
+          <a href="mailto:contact@camilore.com">contact@camilore.com</a>
+          <a href="apexdelta.html">ApexDelta</a>
+          <a href="privacy.html">Confidentialité</a>
+          <a href="#top">Retour en haut</a>
+        </div>
     </div>
   </footer>
 

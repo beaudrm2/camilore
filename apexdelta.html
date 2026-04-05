@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApexDelta · Camilore</title>
+  <meta name="description" content="ApexDelta est une application de dashboard de sim racing axée sur la télémétrie, le delta en direct et la performance sur piste." />
+  <meta name="theme-color" content="#0b0f19" />
+  <link rel="canonical" href="https://camilore.com/">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card: rgba(255, 255, 255, 0.04);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fb;
+      --muted: #b7c0d1;
+      --sky: #7dd3fc;
+      --orange: #fb923c;
+      --max: 1120px;
+      --radius: 24px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(251, 146, 60, 0.16), transparent 22%),
+        linear-gradient(180deg, #0b0f19 0%, #101726 100%);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 15, 25, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 84px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      font-size: 1.55rem;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--sky), var(--orange));
+      box-shadow: 0 0 24px rgba(125, 211, 252, 0.35);
+      flex: 0 0 auto;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); }
+
+    .lang-switcher {
+      display: inline-flex;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      padding: 9px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      color: #07111c;
+      background: linear-gradient(135deg, var(--sky), var(--orange));
+    }
+
+    .hero {
+      padding: 84px 0 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--sky), var(--orange));
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 0.97;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.08rem;
+      max-width: 60ch;
+      margin-top: 24px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sky), var(--orange));
+      color: #07111c;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.18);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .mock {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock::after {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      right: -40px;
+      top: -40px;
+      background: radial-gradient(circle, rgba(251,146,60,0.16), transparent 70%);
+    }
+
+    .dash-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .dash-pill, .dash-box {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      padding: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dash-pill strong, .dash-box strong { display: block; font-size: 1rem; }
+    .dash-pill span, .dash-box span { color: var(--muted); font-size: 0.9rem; }
+
+    section { padding: 26px 0; }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      min-height: 215px;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--sky), var(--orange));
+      opacity: 0.8;
+    }
+
+    .card .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(125,211,252,0.12);
+      border: 1px solid rgba(125,211,252,0.18);
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .card p, .spec li {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .spec-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .spec ul { margin: 0; padding-left: 20px; }
+    .spec li { margin-bottom: 10px; }
+
+    .footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 26px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .cards, .spec-wrap { grid-template-columns: 1fr; }
+      .section-heading, .nav, .footer-inner { flex-direction: column; align-items: flex-start; }
+      .header-right { width: 100%; justify-content: space-between; }
+      .dash-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="Camilore home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Camilore</span>
+      </a>
+
+      <div class="header-right">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" data-i18n="navHome">Accueil</a>
+          <a href="apexdelta.html" data-i18n="navApexDelta">ApexDelta</a>
+          <a href="privacy.html" data-i18n="navPrivacy">Confidentialité</a>
+        </nav>
+
+        <div class="lang-switcher" aria-label="Language switcher">
+          <button class="lang-btn active" data-lang="fr" type="button">FR</button>
+          <button class="lang-btn" data-lang="en" type="button">EN</button>
+          <button class="lang-btn" data-lang="es" type="button">ES</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            <span data-i18n="eyebrow">Dashboard de sim racing</span>
+          </div>
+          <h1 data-i18n="heroTitle">La télémétrie claire. Le delta utile. La performance en direct.</h1>
+          <p class="hero-copy" data-i18n="heroCopy">ApexDelta est une application pensée pour les pilotes de sim racing qui veulent une lecture rapide, claire et exploitable de leurs données de course. Conçue pour évoluer, elle vise à offrir un dashboard moderne, pratique et orienté performance.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:contact@camilore.com" data-i18n="ctaPrimary">Demander des nouvelles</a>
+            <a class="btn btn-secondary" href="privacy.html" data-i18n="ctaSecondary">Voir la politique de confidentialité</a>
+          </div>
+        </div>
+
+        <aside class="panel mock" aria-label="ApexDelta preview">
+          <div class="dash-row">
+            <div class="dash-pill"><strong>DELTA</strong><span data-i18n="mock1">Écart en direct</span></div>
+            <div class="dash-pill"><strong>S1 / S2 / S3</strong><span data-i18n="mock2">Lecture secteur</span></div>
+            <div class="dash-pill"><strong>TYRES</strong><span data-i18n="mock3">Fenêtre utile</span></div>
+          </div>
+          <div class="dash-box"><strong data-i18n="mock4Title">Pensé pour la clarté</strong><span data-i18n="mock4Body">Une interface lisible rapidement, même en pleine session.</span></div>
+          <div class="dash-box"><strong data-i18n="mock5Title">Pensé pour évoluer</strong><span data-i18n="mock5Body">Base dashboard aujourd’hui. Plus de coaching et d’analyse demain.</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-heading">
+          <div><h2 data-i18n="featuresTitle">Ce que vise ApexDelta</h2></div>
+          <p data-i18n="featuresIntro">Une expérience de course plus claire, plus utile et plus agréable pour les pilotes qui veulent comprendre ce qui se passe sans surcharge visuelle.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">📊</div>
+            <h3 data-i18n="f1Title">Télémétrie lisible</h3>
+            <p data-i18n="f1Body">Des informations présentées avec clarté pour être utiles en temps réel plutôt que simplement techniques.</p>
+          </article>
+          <article class="card">
+            <div class="icon">⏱️</div>
+            <h3 data-i18n="f2Title">Delta en direct</h3>
+            <p data-i18n="f2Body">Une lecture du delta pensée pour les pilotes, avec une expérience plus intuitive et plus proche des attentes sur piste.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🏁</div>
+            <h3 data-i18n="f3Title">Focus performance</h3>
+            <p data-i18n="f3Body">Un outil construit pour aider à mieux comprendre ses tours, ses secteurs et sa progression générale.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap spec-wrap">
+        <div class="panel spec">
+          <h2 data-i18n="whoTitle">Pour qui</h2>
+          <ul>
+            <li data-i18n="who1">Pilotes de F1 et de sim racing qui veulent un dashboard clair.</li>
+            <li data-i18n="who2">Utilisateurs qui aiment les données utiles sans interface encombrée.</li>
+            <li data-i18n="who3">Passionnés qui veulent suivre leur performance en direct.</li>
+          </ul>
+        </div>
+        <div class="panel spec">
+          <h2 data-i18n="roadmapTitle">Orientation produit</h2>
+          <ul>
+            <li data-i18n="road1">Base actuelle : dashboard et lecture en direct.</li>
+            <li data-i18n="road2">Évolution prévue : plus d’analyse, plus d’accompagnement, plus d’intelligence produit.</li>
+            <li data-i18n="road3">Vision : un outil moderne, fiable et apprécié des sim racers.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div data-i18n="footerCopy">© 2026 Camilore. Tous droits réservés.</div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="footerHome">Accueil</a>
+        <a href="privacy.html" data-i18n="footerPrivacy">Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      fr: {
+        navHome: 'Accueil', navApexDelta: 'ApexDelta', navPrivacy: 'Confidentialité',
+        eyebrow: 'Dashboard de sim racing',
+        heroTitle: 'La télémétrie claire. Le delta utile. La performance en direct.',
+        heroCopy: 'ApexDelta est une application pensée pour les pilotes de sim racing qui veulent une lecture rapide, claire et exploitable de leurs données de course. Conçue pour évoluer, elle vise à offrir un dashboard moderne, pratique et orienté performance.',
+        ctaPrimary: 'Demander des nouvelles', ctaSecondary: 'Voir la politique de confidentialité',
+        mock1: 'Écart en direct', mock2: 'Lecture secteur', mock3: 'Fenêtre utile', mock4Title: 'Pensé pour la clarté', mock4Body: 'Une interface lisible rapidement, même en pleine session.', mock5Title: 'Pensé pour évoluer', mock5Body: 'Base dashboard aujourd’hui. Plus de coaching et d’analyse demain.',
+        featuresTitle: 'Ce que vise ApexDelta', featuresIntro: 'Une expérience de course plus claire, plus utile et plus agréable pour les pilotes qui veulent comprendre ce qui se passe sans surcharge visuelle.',
+        f1Title: 'Télémétrie lisible', f1Body: 'Des informations présentées avec clarté pour être utiles en temps réel plutôt que simplement techniques.',
+        f2Title: 'Delta en direct', f2Body: 'Une lecture du delta pensée pour les pilotes, avec une expérience plus intuitive et plus proche des attentes sur piste.',
+        f3Title: 'Focus performance', f3Body: 'Un outil construit pour aider à mieux comprendre ses tours, ses secteurs et sa progression générale.',
+        whoTitle: 'Pour qui', who1: 'Pilotes de F1 et de sim racing qui veulent un dashboard clair.', who2: 'Utilisateurs qui aiment les données utiles sans interface encombrée.', who3: 'Passionnés qui veulent suivre leur performance en direct.',
+        roadmapTitle: 'Orientation produit', road1: 'Base actuelle : dashboard et lecture en direct.', road2: 'Évolution prévue : plus d’analyse, plus d’accompagnement, plus d’intelligence produit.', road3: 'Vision : un outil moderne, fiable et apprécié des sim racers.',
+        footerCopy: '© 2026 Camilore. Tous droits réservés.', footerHome: 'Accueil', footerPrivacy: 'Confidentialité'
+      },
+      en: {
+        navHome: 'Home', navApexDelta: 'ApexDelta', navPrivacy: 'Privacy',
+        eyebrow: 'Sim racing dashboard',
+        heroTitle: 'Clear telemetry. Useful delta. Live performance.',
+        heroCopy: 'ApexDelta is designed for sim racers who want a fast, clear, and actionable view of their race data. Built to evolve, it aims to deliver a modern, practical, performance-oriented dashboard.',
+        ctaPrimary: 'Request updates', ctaSecondary: 'View privacy policy',
+        mock1: 'Live gap', mock2: 'Sector view', mock3: 'Useful tyre window', mock4Title: 'Built for clarity', mock4Body: 'An interface that stays readable, even in the middle of a session.', mock5Title: 'Built to evolve', mock5Body: 'Dashboard foundation today. More coaching and analysis tomorrow.',
+        featuresTitle: 'What ApexDelta aims to deliver', featuresIntro: 'A clearer, more useful, and more enjoyable racing experience for drivers who want to understand what is happening without visual overload.',
+        f1Title: 'Readable telemetry', f1Body: 'Information presented clearly so it is useful in real time, not just technical.',
+        f2Title: 'Live delta', f2Body: 'A delta view designed for drivers, with a more intuitive experience closer to what racers expect on track.',
+        f3Title: 'Performance focus', f3Body: 'A tool built to help understand laps, sectors, and overall improvement.',
+        whoTitle: 'Who it is for', who1: 'F1 and sim racing drivers who want a clear dashboard.', who2: 'Users who like useful data without a cluttered interface.', who3: 'Enthusiasts who want to track their performance live.',
+        roadmapTitle: 'Product direction', road1: 'Current base: dashboard and live reading.', road2: 'Planned evolution: more analysis, more guidance, more product intelligence.', road3: 'Vision: a modern, reliable tool appreciated by sim racers.',
+        footerCopy: '© 2026 Camilore. All rights reserved.', footerHome: 'Home', footerPrivacy: 'Privacy'
+      },
+      es: {
+        navHome: 'Inicio', navApexDelta: 'ApexDelta', navPrivacy: 'Privacidad',
+        eyebrow: 'Dashboard de sim racing',
+        heroTitle: 'Telemetría clara. Delta útil. Rendimiento en vivo.',
+        heroCopy: 'ApexDelta está pensada para pilotos de sim racing que quieren una lectura rápida, clara y útil de sus datos de carrera. Diseñada para evolucionar, busca ofrecer un dashboard moderno, práctico y orientado al rendimiento.',
+        ctaPrimary: 'Solicitar novedades', ctaSecondary: 'Ver política de privacidad',
+        mock1: 'Diferencia en vivo', mock2: 'Lectura por sector', mock3: 'Ventana útil de neumáticos', mock4Title: 'Pensada para la claridad', mock4Body: 'Una interfaz fácil de leer incluso en plena sesión.', mock5Title: 'Pensada para evolucionar', mock5Body: 'Base de dashboard hoy. Más coaching y análisis mañana.',
+        featuresTitle: 'Lo que busca ofrecer ApexDelta', featuresIntro: 'Una experiencia de carrera más clara, más útil y más agradable para pilotos que quieren entender lo que ocurre sin sobrecarga visual.',
+        f1Title: 'Telemetría legible', f1Body: 'Información presentada con claridad para que sea útil en tiempo real y no solo técnica.',
+        f2Title: 'Delta en vivo', f2Body: 'Una lectura del delta pensada para pilotos, con una experiencia más intuitiva y más cercana a lo que se espera en pista.',
+        f3Title: 'Enfoque en rendimiento', f3Body: 'Una herramienta construida para ayudar a comprender mejor vueltas, sectores y progreso general.',
+        whoTitle: 'Para quién', who1: 'Pilotos de F1 y sim racing que quieren un dashboard claro.', who2: 'Usuarios que prefieren datos útiles sin una interfaz recargada.', who3: 'Apasionados que quieren seguir su rendimiento en vivo.',
+        roadmapTitle: 'Dirección del producto', road1: 'Base actual: dashboard y lectura en vivo.', road2: 'Evolución prevista: más análisis, más acompañamiento y más inteligencia de producto.', road3: 'Visión: una herramienta moderna, fiable y apreciada por los sim racers.',
+        footerCopy: '© 2026 Camilore. Todos los derechos reservados.', footerHome: 'Inicio', footerPrivacy: 'Privacidad'
+      }
+    };
+
+    function setLanguage(lang) {
+      const dict = translations[lang] || translations.fr;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      localStorage.setItem('camilore-lang', lang);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    const savedLang = localStorage.getItem('camilore-lang');
+    const browserLang = navigator.language.slice(0, 2);
+    const initialLang = translations[savedLang] ? savedLang : (translations[browserLang] ? browserLang : 'fr');
+    setLanguage(initialLang);
+  </script>
+</body>
+</html>
