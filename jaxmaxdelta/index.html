@@ -351,7 +351,7 @@
       fr: {
         navHome:'Accueil', navSupport:'Support', navPrivacy:'Confidentialité',
         eyebrow:'Sim Racing · iOS',
-        tagline:'From basement to podium.',
+        tagline:'From <em>basement</em> to podium.',
         heroCopy:'Jax Max Delta est votre compagnon de course : télémétrie en direct, ingénieur vocal IA, delta de tour, gestion du garage et bien plus — directement sur votre iPhone, pendant chaque session.',
         ctaDownload:'Télécharger sur l'App Store', ctaSupport:'Obtenir de l'aide',
         featuresLabel:'Fonctionnalités',
@@ -363,7 +363,7 @@
         f4Title:'Garage & Réglages', f4Body:'Parcourez, comparez et gérez vos réglages de voiture sur tous les circuits, directement depuis l'application.',
         f5Title:'Cartes de circuit', f5Body:'Visualisez votre position sur la piste en temps réel avec des tracés de tour superposés sur la carte du circuit.',
         f6Title:'Historique de session', f6Body:'Revoyez chaque session que vous avez conduite : tours, secteurs, données de télémétrie et tracés complets.',
-        bannerQuote:'Votre compagnon de course, du sous-sol au podium.',
+        bannerQuote:'Votre compagnon de course, du <em>sous-sol</em> au podium.',
         bannerSub:'Jax Max Delta apporte des outils de télémétrie de niveau professionnel à chaque pilote de sim racing — sans ingénieur requis.',
         ctaTitle:'Prêt à passer au niveau supérieur ?',
         ctaBody:'Téléchargez Jax Max Delta sur l'App Store et prenez le contrôle de votre performance en sim racing.',
@@ -374,7 +374,7 @@
       en: {
         navHome:'Home', navSupport:'Support', navPrivacy:'Privacy',
         eyebrow:'Sim Racing · iOS',
-        tagline:'From basement to podium.',
+        tagline:'From <em>basement</em> to podium.',
         heroCopy:'Jax Max Delta is your racing companion — live telemetry, AI voice engineer, lap delta, garage management and more, right on your iPhone during every session.',
         ctaDownload:'Download on the App Store', ctaSupport:'Get support',
         featuresLabel:'Features',
@@ -386,7 +386,7 @@
         f4Title:'Garage & Setup', f4Body:'Browse, compare, and manage vehicle setups across every circuit, directly from the app.',
         f5Title:'Track Maps', f5Body:'Visualize your position on track in real time with lap trace overlays on the circuit map.',
         f6Title:'Session History', f6Body:'Review every session you have driven: laps, sectors, telemetry data, and full traces.',
-        bannerQuote:'Your racing companion, from basement to podium.',
+        bannerQuote:'Your racing companion, from <em>basement</em> to podium.',
         bannerSub:'Jax Max Delta brings professional-grade telemetry tools to every sim racer\'s setup — no engineer required.',
         ctaTitle:'Ready to level up?',
         ctaBody:'Download Jax Max Delta on the App Store and take control of your sim racing performance.',
@@ -397,7 +397,7 @@
       es: {
         navHome:'Inicio', navSupport:'Soporte', navPrivacy:'Privacidad',
         eyebrow:'Sim Racing · iOS',
-        tagline:'From basement to podium.',
+        tagline:'From <em>basement</em> to podium.',
         heroCopy:'Jax Max Delta es tu compañero de carrera: telemetría en vivo, ingeniero de voz IA, delta de vuelta, gestión del garaje y mucho más, directamente en tu iPhone durante cada sesión.',
         ctaDownload:'Descargar en el App Store', ctaSupport:'Obtener ayuda',
         featuresLabel:'Características',
@@ -409,7 +409,7 @@
         f4Title:'Garaje y configuración', f4Body:'Navega, compara y gestiona las configuraciones de tu coche en todos los circuitos, directamente desde la app.',
         f5Title:'Mapas de circuito', f5Body:'Visualiza tu posición en pista en tiempo real con trazados de vuelta superpuestos en el mapa del circuito.',
         f6Title:'Historial de sesión', f6Body:'Revisa cada sesión que hayas completado: vueltas, sectores, datos de telemetría y trazados completos.',
-        bannerQuote:'Tu compañero de carrera, del sótano al podio.',
+        bannerQuote:'Tu compañero de carrera, del <em>sótano</em> al podio.',
         bannerSub:'Jax Max Delta acerca herramientas de telemetría de nivel profesional a cada piloto de sim racing — sin necesidad de ingeniero.',
         ctaTitle:'¿Listo para subir de nivel?',
         ctaBody:'Descarga Jax Max Delta en el App Store y toma el control de tu rendimiento en sim racing.',
@@ -423,7 +423,7 @@
       document.documentElement.lang = lang;
       document.querySelectorAll('[data-i18n]').forEach((el) => {
         const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.textContent = dict[key];
+        if (dict[key]) el.innerHTML = dict[key];
       });
       document.querySelectorAll('.lang-btn').forEach((btn) => btn.classList.toggle('active', btn.dataset.lang === lang));
       localStorage.setItem('camilore-lang', lang);
