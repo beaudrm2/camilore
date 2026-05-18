@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -243,8 +243,8 @@
           <a href="privacy.html" data-i18n="navPrivacy">Confidentialité</a>
         </nav>
         <div class="lang-switcher" aria-label="Language switcher">
-          <button class="lang-btn active" data-lang="fr" type="button">FR</button>
-          <button class="lang-btn" data-lang="en" type="button">EN</button>
+          <button class="lang-btn active" data-lang="en" type="button">EN</button>
+          <button class="lang-btn" data-lang="fr" type="button">FR</button>
           <button class="lang-btn" data-lang="es" type="button">ES</button>
         </div>
       </div>
@@ -439,9 +439,7 @@
     }
     document.querySelectorAll('.lang-btn').forEach((btn) => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
     const savedLang = localStorage.getItem('camilore-lang');
-    const browserLang = navigator.language.slice(0, 2);
-    const initialLang = translations[savedLang] ? savedLang : (translations[browserLang] ? browserLang : 'en');
-    setLanguage(initialLang);
+    setLanguage(translations[savedLang] ? savedLang : 'en');
   </script>
 </body>
 </html>

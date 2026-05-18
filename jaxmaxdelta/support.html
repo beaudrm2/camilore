@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -157,8 +157,8 @@
           <a href="privacy.html" data-i18n="navPrivacy">Confidentialité</a>
         </nav>
         <div class="lang-switcher" aria-label="Language switcher">
-          <button class="lang-btn active" data-lang="fr" type="button">FR</button>
-          <button class="lang-btn" data-lang="en" type="button">EN</button>
+          <button class="lang-btn active" data-lang="en" type="button">EN</button>
+          <button class="lang-btn" data-lang="fr" type="button">FR</button>
           <button class="lang-btn" data-lang="es" type="button">ES</button>
         </div>
       </div>
@@ -328,14 +328,14 @@
         group1:'Démarrage', group2:'Ingénieur vocal', group3:'Achats et abonnement', group4:'Données et confidentialité', group5:'Dépannage',
         q1:'Comment connecter Jax Max Delta à mon jeu ?',
         q2:'Quels jeux sont supportés ?',
-        q3:'L'application fonctionne-t-elle sur console ?',
-        q4:'Qu'est-ce que l'ingénieur vocal ?',
-        q5:'Comment régler le volume de l'ingénieur vocal ?',
+        q3:'L\'application fonctionne-t-elle sur console ?',
+        q4:'Qu\'est-ce que l\'ingénieur vocal ?',
+        q5:'Comment régler le volume de l\'ingénieur vocal ?',
         q6:'Comment restaurer mes achats ?',
         q7:'Comment annuler mon abonnement ?',
         q8:'Où sont stockées mes données de session ?',
         q9:'Jax Max Delta collecte-t-elle des données personnelles ?',
-        q10:'L'application ne reçoit pas de données de télémétrie.',
+        q10:'L\'application ne reçoit pas de données de télémétrie.',
         q11:'L\'application se ferme de façon inattendue.',
         a1:'<p>Jax Max Delta reçoit les données via UDP depuis F1 2024 ou F1 2025. Dans les paramètres de votre jeu :</p><ol><li>Allez dans Paramètres → Télémétrie</li><li>Activez la sortie UDP</li><li>Définissez l\'adresse IP de votre iPhone (visible dans Réglages → Wi-Fi)</li><li>Port : 20777 (par défaut)</li><li>Format : F1 23 ou ultérieur</li></ol><p>Assurez-vous que votre console/PC et votre iPhone sont sur le même réseau Wi-Fi.</p>',
         a2:'<p>Jax Max Delta supporte F1 2024 et F1 2025. Le support d\'autres titres pourra être ajouté dans les futures mises à jour.</p>',
@@ -428,9 +428,7 @@
     }
     document.querySelectorAll('.lang-btn').forEach((btn) => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
     const savedLang = localStorage.getItem('camilore-lang');
-    const browserLang = navigator.language.slice(0, 2);
-    const initialLang = translations[savedLang] ? savedLang : (translations[browserLang] ? browserLang : 'en');
-    setLanguage(initialLang);
+    setLanguage(translations[savedLang] ? savedLang : 'en');
   </script>
 </body>
 </html>

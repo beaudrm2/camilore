@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -129,8 +129,8 @@
           <a href="privacy.html" data-i18n="navPrivacy">Confidentialité</a>
         </nav>
         <div class="lang-switcher" aria-label="Language switcher">
-          <button class="lang-btn active" data-lang="fr" type="button">FR</button>
-          <button class="lang-btn" data-lang="en" type="button">EN</button>
+          <button class="lang-btn active" data-lang="en" type="button">EN</button>
+          <button class="lang-btn" data-lang="fr" type="button">FR</button>
           <button class="lang-btn" data-lang="es" type="button">ES</button>
         </div>
       </div>
@@ -212,7 +212,7 @@
         updated:'<strong>Dernière mise à jour :</strong> 2026-05-15',
         s1Title:'1. Responsable du traitement',
         s1Body:'Jax Max Delta est une application développée et publiée par Camilore. Pour toute question relative à la confidentialité, contactez-nous à <a class="mailto" href="mailto:contact@camilore.com">contact@camilore.com</a>.',
-        s2Title:'2. Données traitées par l'application',
+        s2Title:'2. Données traitées par l\'application',
         s2Intro:'Jax Max Delta ne crée pas de compte utilisateur et ne vous demande aucune information personnelle pour fonctionner. Voici ce qui est traité :',
         s2li1:'<strong>Données de télémétrie :</strong> transmises par votre simulateur de course (F1 2024, F1 2025). Ces données sont traitées localement sur votre appareil et ne sont pas envoyées à nos serveurs.',
         s2li2:'<strong>Données de session :</strong> tours, secteurs, tracés de course, réglages de voiture. Stockées localement sur votre appareil. Vous pouvez les supprimer à tout moment en désinstallant l\'application.',
@@ -221,18 +221,18 @@
         s3Title:'3. Traitement vocal et audio',
         s3Body:'<strong>L\'ingénieur vocal fonctionne entièrement sur votre appareil.</strong> Aucune donnée vocale n\'est enregistrée, transmise ou stockée. La synthèse vocale utilise les capacités natives d\'iOS et ne nécessite aucune connexion à un service tiers.',
         s4Title:'4. Achats intégrés — RevenueCat',
-        s4Body:'Jax Max Delta utilise RevenueCat pour gérer les abonnements et achats intégrés. RevenueCat peut recevoir un identifiant d'installation anonyme et des informations de transaction afin de valider vos achats. RevenueCat ne reçoit pas vos données de télémétrie ni vos données de session.',
+        s4Body:'Jax Max Delta utilise RevenueCat pour gérer les abonnements et achats intégrés. RevenueCat peut recevoir un identifiant d\'installation anonyme et des informations de transaction afin de valider vos achats. RevenueCat ne reçoit pas vos données de télémétrie ni vos données de session.',
         s4Link:'Politique de confidentialité de RevenueCat : <a class="mailto" href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">revenuecat.com/privacy</a>',
         s5Title:'5. Partage des données',
-        s5Body:'Camilore ne vend pas vos données. Les seules données partagées avec des tiers sont celles transmises à RevenueCat et Apple pour la gestion des achats. Aucune autre donnée n'est partagée avec des annonceurs ou des courtiers de données.',
+        s5Body:'Camilore ne vend pas vos données. Les seules données partagées avec des tiers sont celles transmises à RevenueCat et Apple pour la gestion des achats. Aucune autre donnée n\'est partagée avec des annonceurs ou des courtiers de données.',
         s6Title:'6. Conservation des données',
-        s6Body:'Vos données de session et de télémétrie sont stockées uniquement sur votre appareil. Vous en avez le contrôle total : elles sont supprimées lorsque vous désinstallez l'application. Nous ne conservons aucune copie sur nos serveurs.',
+        s6Body:'Vos données de session et de télémétrie sont stockées uniquement sur votre appareil. Vous en avez le contrôle total : elles sont supprimées lorsque vous désinstallez l\'application. Nous ne conservons aucune copie sur nos serveurs.',
         s7Title:'7. Vos droits',
         s7Body:'Vous pouvez à tout moment supprimer vos données locales en désinstallant Jax Max Delta. Pour toute demande concernant les données éventuellement traitées par RevenueCat, contactez-nous à <a class="mailto" href="mailto:contact@camilore.com">contact@camilore.com</a>.',
         s8Title:'8. Sécurité',
         s8Body:'Vos données étant traitées localement sur votre appareil, leur sécurité dépend principalement de celle de votre iPhone. Nous prenons des mesures raisonnables pour sécuriser toute communication avec les services tiers que nous utilisons.',
         s9Title:'9. Enfants',
-        s9Body:'Jax Max Delta n'est pas destinée aux enfants de moins de 13 ans. Nous ne collectons sciemment aucune donnée provenant d'enfants.',
+        s9Body:'Jax Max Delta n\'est pas destinée aux enfants de moins de 13 ans. Nous ne collectons sciemment aucune donnée provenant d\'enfants.',
         s10Title:'10. Modifications',
         s10Body:'Cette politique peut être mise à jour. La version la plus récente sera toujours disponible à l\'adresse <strong>www.camilore.com/jaxmaxdelta/privacy.html</strong> avec la date de mise à jour.',
         s11Title:'11. Contact',
@@ -325,9 +325,7 @@
     }
     document.querySelectorAll('.lang-btn').forEach((btn) => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
     const savedLang = localStorage.getItem('camilore-lang');
-    const browserLang = navigator.language.slice(0, 2);
-    const initialLang = translations[savedLang] ? savedLang : (translations[browserLang] ? browserLang : 'en');
-    setLanguage(initialLang);
+    setLanguage(translations[savedLang] ? savedLang : 'en');
   </script>
 </body>
 </html>
