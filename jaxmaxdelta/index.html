@@ -118,20 +118,28 @@
     /* ── Hero visual ── */
     .hero-visual {
       display: flex; align-items: center; justify-content: center;
-      position: relative; min-height: 320px;
+      position: relative; min-height: 380px;
     }
-    .glow { position: absolute; width: 320px; height: 320px; border-radius: 999px; background: radial-gradient(circle, rgba(229,53,42,0.16) 0%, transparent 68%); pointer-events: none; }
-    .emblem {
-      position: relative; z-index: 2; text-align: center;
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 28px; padding: 52px 64px; backdrop-filter: blur(14px);
+    .glow { position: absolute; width: 360px; height: 360px; border-radius: 999px; background: radial-gradient(circle, rgba(229,53,42,0.20) 0%, transparent 68%); pointer-events: none; }
+    .brand-stack {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
     }
-    .emblem-jax {
-      display: block; font-size: 5.5rem; font-weight: 900;
-      letter-spacing: -0.05em; line-height: 1; color: #ffffff;
+    .helmet-card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 28px;
+      padding: 10px;
+      box-shadow:
+        0 36px 88px rgba(0,0,0,0.70),
+        0 0 0 1px rgba(255,255,255,0.07),
+        0 0 90px rgba(229,53,42,0.22);
+      width: min(270px, 90%);
     }
-    .emblem-jax .x-red { color: var(--red); }
-    .emblem-sub { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+    .helmet-img { width: 100%; display: block; border-radius: 18px; }
+    .jax-wordmark {
+      width: min(210px, 72%);
+      filter: drop-shadow(0 3px 14px rgba(0,0,0,0.55));
+    }
 
     /* ── Sections ── */
     .section { padding: 24px 0 52px; }
@@ -216,8 +224,7 @@
     }
     @media (max-width: 600px) {
       .cards { grid-template-columns: 1fr; }
-      .emblem { padding: 36px 40px; }
-      .emblem-jax { font-size: 4rem; }
+      .helmet-card { width: min(200px, 80%); }
     }
   </style>
 </head>
@@ -259,9 +266,11 @@
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="glow"></div>
-          <div class="emblem">
-            <span class="emblem-jax">JA<span class="x-red">X</span></span>
-            <span class="emblem-sub">Max Delta</span>
+          <div class="brand-stack">
+            <div class="helmet-card">
+              <img class="helmet-img" src="../assets/images/brand/jax_helmet.png" alt="" />
+            </div>
+            <img class="jax-wordmark" src="../assets/images/brand/jax.png" alt="" />
           </div>
         </div>
       </div>
